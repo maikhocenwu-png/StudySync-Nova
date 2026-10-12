@@ -2,7 +2,7 @@ const { sequelize, Course, Topic } = require('./src/models');
 
 const seedData = [
   { code: 'CISC 3130', name: 'Data Structures', topics: ['Linked Lists', 'Stacks and Queues', 'Trees', 'Hash Tables', 'Sorting Algorithms'] },
-  { code: 'CISC 3115', name: 'Intro to Modern Programming Techniques', topics: ['Object-Oriented Design', 'Inheritance', 'Interfaces'] },
+  { code: 'CISC 3115', name: 'Intro to Modern Programming Techniques', topics: ['Object-Oriented Programming', 'Inheritance', 'Interfaces'] },
   { code: 'CISC 3140', name: 'Large Scale Web Applications', topics: ['REST APIs', 'Databases', 'Authentication'] }
 ];
 
