@@ -1,3 +1,5 @@
+const { Op } = require('sequelize');
+const { nextDifficulty } = require('../services/adaptiveService');
 const { User, Topic, Quiz, Question, StudyMaterial } = require('../models');
 const { generateQuestions } = require('../services/aiService');
 
@@ -11,7 +13,17 @@ async function createQuiz(req, res) {
     if (!topic) return res.status(404).json({ error: 'Topic not found' });
 
     const user = await User.findByPk(req.user.id);
-    const difficulty = req.body.difficulty || user.difficulty_pref;
+
+    let difficulty = req.body.difficulty;
+    if (!difficulty) {
+    // Adapt to the student's most recent finished quiz on this topic
+    const last = await Quiz.findOne({
+        where: { user_id: user.id, topic_id: topic.id, completed_at: { [Op.ne]: null } },
+        order: [['completed_at', 'DESC']]
+    });
+    difficulty = last ? nextDifficulty(last.difficulty, last.score) : user.difficulty_pref;
+    }
+
     if (!['beginner', 'intermediate', 'advanced'].includes(difficulty)) {
       return res.status(400).json({ error: 'Invalid difficulty' });
     }

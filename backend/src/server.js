@@ -13,6 +13,7 @@ app.get('/api/health', (req, res) => res.json({ status: 'ok', message: 'StudySyn
 app.use('/api/auth', authRoutes);
 app.use('/api/courses', coursesRoutes);
 app.use('/api/quizzes', require('./routes/quizzes'));
+app.use('/api/progress', require('./routes/progress'));
 
 const PORT = process.env.PORT || 5000;
 
