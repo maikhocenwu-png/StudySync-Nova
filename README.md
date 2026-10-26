@@ -1,5 +1,3 @@
-# StudySync-Nova
-
 # StudySync Nova
 
 StudySync Nova is a web application designed to help College students organize their studying and practice what they learn. Students can take practice quizzes, track their performance, and receive recommendations about which topics they should study next.
